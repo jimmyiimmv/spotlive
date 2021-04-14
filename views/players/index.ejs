@@ -24,8 +24,8 @@
           </div>
           
 <!-- embed player-->
-          <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
-<div id="testplayer"></div>
+<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+<div id='testplayer_<%= player.description %>'></div>
 <script type="text/javascript">
   
   var channelX = '<%= player.description %>';
@@ -35,10 +35,11 @@
     height: 360,
     channel: channelX
   };
-  var player = new Twitch.Player("testplayer", options);
+  var player = new Twitch.Player('testplayer_<%= player.description %>', options);
   player.setVolume(0.5);
 </script>
 <!-- embed player-->
+
 
           <div class="card-text mb-2"><%= player.description %></div>
           <a href="players/<%= player.slug %>" class="btn btn-primary">Read More</a>
