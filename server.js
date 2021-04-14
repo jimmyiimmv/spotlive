@@ -22,9 +22,12 @@ initializePassport(
 
 const users = []
 
-mongoose.connect('mongodb://localhost/blog', {
+mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
 })
+const db = mongoose.connection
+db.on('error', error => console.error(error))
+db.once('open', () => console.log('Connected to mongoose'))
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
