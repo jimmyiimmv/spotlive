@@ -9,6 +9,7 @@
 </head>
 <body>
   <div class="container">
+      <h2> Welcome <%= name %></h2>
     <h1 class="mb-4">SPOTLIVE Players</h1>
     <a href="/players/new" class="btn btn-success">New Player</a>
 
@@ -25,11 +26,12 @@
           <form action="/players/<%= player.id %>?_method=DELETE" method="POST" class="d-inline">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
-          
         </div>
       </div>
     <% }) %>
-    <a href="/login">Login</a>
+    <form action="/logout?_method=DELETE" method='POST'>
+        <button type="submit">Log Out</button>
+      </form>
   </div>
 </body>
 </html>
