@@ -8,6 +8,9 @@
   <title>Blog</title>
 </head>
 <body>
+  
+  
+  
   <div class="container">
     <h1 class="mb-4">SPOTLIVE Players</h1>
     <a href="/players/new" class="btn btn-success">New Player</a>
@@ -19,6 +22,24 @@
           <div class="card-subtitle text-muted mb-2">
             <%= player.createdAt.toLocaleDateString() %>
           </div>
+          
+<!-- embed player-->
+          <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+<div id="testplayer"></div>
+<script type="text/javascript">
+  
+  var channelX = '<%= player.description %>';
+  
+  var options = {
+    width: 640,
+    height: 360,
+    channel: channelX
+  };
+  var player = new Twitch.Player("testplayer", options);
+  player.setVolume(0.5);
+</script>
+<!-- embed player-->
+
           <div class="card-text mb-2"><%= player.description %></div>
           <a href="players/<%= player.slug %>" class="btn btn-primary">Read More</a>
           <a href="players/edit/<%= player.id %>" class="btn btn-info">Edit</a>
