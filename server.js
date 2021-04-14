@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride('_method'))
 app.use(flash())
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'secret',
   resave: false, 
   saveUninitialized: false
 }))
