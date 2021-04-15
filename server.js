@@ -6,9 +6,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const Player = require('./models/player')
 const playerRouter = require('./routes/players')
+const userRouter = require('./routes/users')
 const methodOverride = require('method-override')
 const app = express()
-const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
@@ -67,6 +67,20 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 })
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
+  const user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+  })
+  try {
+      user = await user.save()
+      res.redirect('/login')
+  } catch (e) {
+      res.render('/register')
+  }
+})
+
+app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     users.push ({
@@ -90,6 +104,7 @@ app.delete('/logout', (req, res) => {
 })
 
 app.use('/players', playerRouter)
+app.use('/users', userRouter)
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
