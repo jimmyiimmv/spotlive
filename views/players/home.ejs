@@ -20,12 +20,49 @@
           <div class="card-subtitle text-muted mb-2">
             <%= player.createdAt.toLocaleDateString() %>
           </div>
+          
+
+
+<% if(player.title.toUpperCase() === "TWITCH"){ %>
+
+<!-- embed twitch player-->
+<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+<div id='testplayer_<%= player.description %>'></div>
+<script type="text/javascript">
+  
+  var channelX = '<%= player.description %>';
+  
+  var options = {
+    width: 960,
+    height: 540,
+    channel: channelX
+  };
+  var player = new Twitch.Player('testplayer_<%= player.description %>', options);
+  player.setVolume(0.5);
+</script>
+
+<!-- embed youtube player-->
+<% } else  if(player.title.toUpperCase() === "YOUTUBE"){ %>
+  <iframe width="960" height="540" src='<%= player.description %>' 
+    title="YouTube video player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- embed facebook player-->
+<% } else  if(player.title.toUpperCase() === "FACEBOOK"){ %>
+  <iframe src='<%= player.description %>' width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+
+  <!-- embed any other player-->
+<% } else { %>
+  <iframe src='<%= player.description %>' width="960" height="540" allowfullscreen="true"></iframe>
+  <% } %>
+
           <div class="card-text mb-2"><%= player.description %></div>
           <a href="players/<%= player.slug %>" class="btn btn-primary">Read More</a>
           <a href="players/edit/<%= player.id %>" class="btn btn-info">Edit</a>
           <form action="/players/<%= player.id %>?_method=DELETE" method="POST" class="d-inline">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
+          
         </div>
       </div>
     <% }) %>

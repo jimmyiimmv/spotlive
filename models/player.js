@@ -17,6 +17,10 @@ const playerSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  platform: {
+    type: String,
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now

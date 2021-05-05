@@ -37,6 +37,7 @@ function savePlayerAndRedirect(path) {
     let player = req.player
     player.title = req.body.title
     player.description = req.body.description
+    player.platform = req.body.platform
     player.markdown = req.body.markdown
     try {
       player = await player.save()

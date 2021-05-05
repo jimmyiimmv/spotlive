@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Blog</title>
+  <title>SPOTLIVE</title>
 </head>
 <body>
   <div class="container">
     <h1 class="mb-4">New Player</h1>
+  <p style="font: italic 20px/20px Arial, serif">How to link a video: <br><br>
+    For twitch: Simply enter a twitch username into the URL field <br>
+    For other platforms, click the "Share" button on the video. Find the "Embed" link, and copy the URL located inside of ' src="" '</p><br><br>
 
     <form action="/players" method="POST">
       <%- include('_form_fields') %>
