@@ -11,8 +11,9 @@
   <div class="container">
     <h1 class="mb-4">New Player</h1>
   <p style="font: italic 20px/20px Arial, serif">How to link a video: <br><br>
-    For twitch: Simply enter a twitch username into the URL field <br>
-    For other platforms, click the "Share" button on the video. Find the "Embed" link, and copy the URL located inside of ' src="" '</p><br><br>
+    For Twitch: Simply enter a twitch username into the URL field <br><br>
+    For YouTube: Simply enter the code at the end of the url after " /watch?v= " <br>(example input: "biSB9_Z3VUw")<br><br>
+    For other platforms, click the "Share" button on the video.<br> Find the "Embed" link and copy the URL located inside of src="" ... <br>(example input: "https://player.vimeo.com/video/140339646")</p><br><br>
 
     <form action="/players" method="POST">
       <%- include('_form_fields') %>
