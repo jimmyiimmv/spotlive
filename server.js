@@ -58,46 +58,14 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
   successRedirect: '/home',
-  failureRedirect: '/login',
+  failureRedirect: '/register',
   failureFlash: true
 }))
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('players/register.ejs')
 })
-/*
-app.post('/register', checkNotAuthenticated, async (req, res) => {
-  const user = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-  })
-  try {
-      user = await user.save()
-      res.redirect('/login')
-  } catch (e) {
-      res.render('/register')
-  }
-})
 
-app.post('/register', checkNotAuthenticated, async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    users.push ({
-      
-
-
-      id: Date.now().toString(),
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword
-    })
-    res.redirect('/login')
-  } catch {
-    res.redirect('/register')
-  }
-})
-*/
 app.delete('/logout', (req, res) => {
   req.logOut()
   res.redirect('/login')
