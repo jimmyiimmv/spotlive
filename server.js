@@ -65,7 +65,7 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
 app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('players/register.ejs')
 })
-
+/*
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   const user = new User({
       name: req.body.name,
@@ -97,7 +97,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
     res.redirect('/register')
   }
 })
-
+*/
 app.delete('/logout', (req, res) => {
   req.logOut()
   res.redirect('/login')
