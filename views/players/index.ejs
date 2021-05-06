@@ -42,7 +42,7 @@
 
 <!-- embed youtube player-->
 <% } else  if(player.platform.toUpperCase() === "YOUTUBE"){ %>
-  <iframe width="960" height="540" src='<%= player.description %>' 
+  <iframe width="960" height="540" src='https://www.youtube.com/embed/<%= player.description %>' 
     title="YouTube video player" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
