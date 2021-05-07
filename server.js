@@ -50,7 +50,7 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('players/login.ejs')
 })
 
-app.post('/login', (req, res) => {
+app.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/login',
