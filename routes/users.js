@@ -2,9 +2,8 @@ const express = require('express')
 const User = require('./../models/users')
 const router = express.Router()
 const bcrypt = require('bcrypt')
-const passport = require('passport')
 
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     let user = new User({
       name: req.body.name,
@@ -19,4 +18,5 @@ router.post('/register', async (req, res) => {
       res.redirect('/register')
     }
 })
+
 module.exports = router
