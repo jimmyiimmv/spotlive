@@ -21,6 +21,13 @@ initializePassport(
 )
 
 const users = []
+users.push ({
+  id: Date.now().toString(),
+  name: 'w',
+  email: 'w@w',
+  password: 'w'
+})
+
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
