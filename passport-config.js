@@ -1,7 +1,26 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
+const User = require('./models/users')
 
-function initialize(passport, getUserByEmail, getUserById) {
+function getUserByEmail(email) {
+    const user = User.findOne({ email: email})
+    if(user == null) {
+        return null
+    } else {
+        return user
+    }
+}
+
+function getUserById(id) {
+    const user = User.findOne({ id: id})
+    if(user == null) {
+        return null
+    } else {
+        return user
+    }
+}
+
+function initialize(passport) {
     const authenticateUser = async (email, password, done) => {
         const user = getUserByEmail(email)
         if (user == null) {
