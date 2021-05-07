@@ -12,11 +12,12 @@ const app = express()
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
+const users = require('./models/users')
 try{
 const initializePassport = require('./passport-config')
 initializePassport(
   passport, 
-  email => users.find(user => users.email === email),
+  email => users.find(users => users.email === email),
   id => users.find(users => users.id === id)
 )
 } catch (e) {
