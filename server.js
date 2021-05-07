@@ -12,22 +12,8 @@ const app = express()
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
-
-const initializePassport = require('./passport-config')
-initializePassport(
-  passport, 
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
-
-const users = []
-users.push ({
-  id: Date.now().toString(),
-  name: 'w',
-  email: 'w@w',
-  password: 'w'
-})
-
+const User = require('./models/users')
+require('./passport-config')(passport)
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
@@ -49,6 +35,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
+
 app.get('/', checkNotAuthenticated, async (req, res) => {
   const players = await Player.find().sort({ createdAt: 'desc' })
   res.render('players/index', { players: players})
@@ -62,12 +49,6 @@ app.get('/home', checkAuthenticated, async (req, res) => {
 app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('players/login.ejs')
 })
-
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/home',
-  failureRedirect: '/login',
-  failureFlash: true
-}))
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('players/register.ejs')
