@@ -12,7 +12,6 @@ router.post('/', async (req, res) => {
     })
     try {
       user = await user.save()
-      console.log(user)
       res.redirect('/login')
     } catch (e) {
       console.log(e)
