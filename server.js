@@ -13,17 +13,10 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const users = require('./models/users')
-try{
 const initializePassport = require('./passport-config')
-initializePassport(
-  passport, 
-  email => users.find(users => users.email === email),
-  id => users.find(users => users.id === id)
-)
-} catch (e) {
-  console.log(e)
-  throw (e)
-}
+
+initializePassport(passport)
+
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
