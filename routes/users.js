@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     let user = new User({
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword
+      password: req.body.password
     })
     try {
       user = await user.save()
