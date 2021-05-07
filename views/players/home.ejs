@@ -8,6 +8,21 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/players/new">Add Player</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 <!-- End of Navbar -->
@@ -18,13 +33,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login</title>
+  <title>SPOTLIVE</title>
 </head>
 <body>
+  
   <div class="container">
-      <h2> Welcome <%= name %></h2>
     <h1 class="mb-4">SPOTLIVE Players</h1>
-    <a href="/players/new" class="btn btn-success">New Player</a>
+    <h2> Welcome <%= name %></h2>
+    <a href="/players/new" class="btn btn-success">Add Player</a>
 
     <% players.forEach(player => { %>
       <div class="card mt-4">
@@ -34,8 +50,10 @@
             <%= player.createdAt.toLocaleDateString() %>
           </div>
           
-<% if(player.title.toUpperCase() === "TWITCH"){ %>
+
 <!-- embed twitch player-->
+<% if(player.platform.toUpperCase() === "TWITCH"){ %>
+
 <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 <div id='testplayer_<%= player.description %>'></div>
 <script type="text/javascript">
@@ -50,18 +68,22 @@
   var player = new Twitch.Player('testplayer_<%= player.description %>', options);
   player.setVolume(0.5);
 </script>
+
 <!-- embed youtube player-->
-<% } else  if(player.title.toUpperCase() === "YOUTUBE"){ %>
-  <iframe width="960" height="540" src='<%= player.description %>' 
+<% } else  if(player.platform.toUpperCase() === "YOUTUBE"){ %>
+  <iframe width="960" height="540" src='https://www.youtube.com/embed/<%= player.description %>' 
     title="YouTube video player" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <!-- embed facebook player-->
-<% } else  if(player.title.toUpperCase() === "FACEBOOK"){ %>
+<% } else  if(player.platform.toUpperCase() === "FACEBOOK"){ %>
   <iframe src='<%= player.description %>' width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+
   <!-- embed any other player-->
 <% } else { %>
   <iframe src='<%= player.description %>' width="960" height="540" allowfullscreen="true"></iframe>
   <% } %>
+
           <div class="card-text mb-2"><%= player.description %></div>
           <a href="players/<%= player.slug %>" class="btn btn-primary">Read More</a>
           <a href="players/edit/<%= player.id %>" class="btn btn-info">Edit</a>
@@ -72,9 +94,7 @@
         </div>
       </div>
     <% }) %>
-    <form action="/logout?_method=DELETE" method='POST'>
-        <button type="submit">Log Out</button>
-      </form>
+    <a href="/login">Login</a>
   </div>
 </body>
 </html>
