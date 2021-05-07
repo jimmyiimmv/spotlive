@@ -17,8 +17,8 @@ const initializePassport = require('./passport-config')
 const users = require('./models/users')
 initializePassport(
   passport, 
-  email => users.find(users => users.email === email),
-  id => users.find(users => users.id === id)
+  email => users.find(user => user.email === email),
+  id => users.find(user => user.id === id)
 )
 
 mongoose.connect(process.env.DATABASE_URL, {
